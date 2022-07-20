@@ -17,9 +17,9 @@ import {
     InputGroup,
     InputRightElement,
     Input,
-    IconButton,
-    Label,
+    IconButton
 } from '@chakra-ui/react';
+import {AddIcon} from '@chakra-ui/icons';
 import {SearchIcon} from '@chakra-ui/icons';
 import {HamburgerIcon} from '@chakra-ui/icons';
 
@@ -42,7 +42,6 @@ function Header() {
         textDecoration: 'none'
 
     }
-
     const router = useRouter();
     const {terms} = router.query;
     const [text,
@@ -60,9 +59,7 @@ function Header() {
             router.push(`/search/?terms=${text}`, undefined, {shallow: true});
         }
     };
-    const stylePlaceholder = {
-    
-    }
+    const stylePlaceholder = {}
     return (
         <Box bg="black" opacity='0.8'>
             <Container>
@@ -108,8 +105,10 @@ function Header() {
                         'flex'
                     ]}
                         spacing={10}>
-                        <MenuItem href="/watchlist">Watchlist</MenuItem>
-                        <MenuItem href="/history">History</MenuItem>
+                        <MenuItem href="/watchlist"> <AddIcon ml='6' mr='2' mt='1'/>Watchlist </MenuItem>
+                        <MenuItem href="/history" ml='4'>
+                            History</MenuItem>
+                        
                         <MenuItem href="/" disabled>TV Show</MenuItem>
 
                     </Stack>
@@ -138,9 +137,10 @@ export default function Layout({title, children}) {
     <> 
     <Head>
         {title && <title>{title}</title>}
-        <link rel="icon" href="/favicon.ico"/>
+        <Link rel="icon" href="/favicon.ico"> </Link>
     </Head> 
-    <Grid minH = "100vh" > <VStack w="full" align="stretch" spacing={5}>
+    < Grid minH = "100vh" > 
+    <VStack w="full" align="stretch" spacing={5}>
         <Header/>
         <Box as="main" h="full">
             {children}

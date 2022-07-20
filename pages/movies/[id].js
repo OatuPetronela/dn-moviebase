@@ -18,12 +18,11 @@ import {
 } from '@chakra-ui/react';
 import {StarIcon} from '@chakra-ui/icons';
 import Layout from '../../components/Layout';
-import HistoryButton from '../../components/HistoryButton';
+import WatchlistButton from '../../components/WatchlistButton';
 
 const MovieContent = () => {
   const { id } = useRouter().query;
   const { data, error } = useSWR(id && `/api/movies/${id}`);
-
 
   if (error) {
     return (
@@ -32,6 +31,7 @@ const MovieContent = () => {
       </Text>
     );
   }
+
   if (!data) {
     return (
       <Center h="full">
@@ -39,6 +39,7 @@ const MovieContent = () => {
       </Center>
     );
   }
+
   const getRuntime = (runtime) => {
     const hours = Math.floor(runtime / 60);
     const minutes = runtime % 60;
@@ -47,7 +48,6 @@ const MovieContent = () => {
 
   const getStarRating = (rating) => {
     const starRating = [];
-
     for (let i = 0; i < Math.floor(rating); i++) {  
       starRating.push(<StarIcon key={i} color="yellow.500" />);
     }
@@ -56,7 +56,6 @@ const MovieContent = () => {
     }
     return starRating;
   }
-
 
   return (
 <>
@@ -74,7 +73,7 @@ const MovieContent = () => {
       </Head>
       <Box minW="300px" pos="relative">
         <HStack pos="absolute" zIndex={1} top={2} right={2}>
-          <HistoryButton />
+         <WatchlistButton  />
         </HStack >
         <Image
           src={buildImageUrl(data.poster_path, 'w300')}

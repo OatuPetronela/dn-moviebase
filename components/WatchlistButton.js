@@ -1,29 +1,29 @@
-import { CalendarIcon } from '@chakra-ui/icons';
 import { IconButton, Tooltip } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import useSWR, { useSWRConfig } from 'swr';
 import { fetcher } from '../utils/api';
+import { AddIcon } from '@chakra-ui/icons';
 
-export default function HistoryButton() {
+export default function WatchlistButton() {
   const { id } = useRouter().query;
-  const { data } = useSWR(`/api/history/${id}`);
+  const { data } = useSWR(`/api/watchlist/${id}`);
   const { mutate } = useSWRConfig();
 
   return (
-    <Tooltip label={data?.found ? 'Remove from history' : 'Add to history'}>
+    <Tooltip label={data?.found ? 'Remove from watchlist' : 'Add to watchlist'}>
       <IconButton
         isLoading={!data}
-        colorScheme={data?.found ? 'purple' : 'gray'}
+        colorScheme={data?.found ? 'red' : 'gray'}
         size="sm"
         onClick={() => {
-          mutate(`/api/history/${id}`, () =>
-            fetcher(`/api/history/${id}`, {
+          mutate(`/api/watchlist/${id}`, () =>
+            fetcher(`/api/watchlist/${id}`, {
               method: data.found ? 'DELETE' : 'PUT',
             })
           );
         }}
       >
-        <CalendarIcon />
+        <AddIcon />
       </IconButton>
     </Tooltip>
   );

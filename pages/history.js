@@ -1,9 +1,14 @@
 import Layout from '../components/Layout';
+import {Heading, Center} from '@chakra-ui/react';
 
-function History() {
+function Watchlist() {
+
     return (
-      <Layout title="Search">
+        <Layout title="Search">
+            <Center>
+                <Heading as='h2'>Your history</Heading>
+            </Center>
         </Layout>
     );
-    }
-    export default History;
+}
+export default Watchlist;
